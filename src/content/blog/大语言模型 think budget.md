@@ -8,6 +8,7 @@ id: 1234567
 date: 2025-10-26 17:13:27
 # cover: "https://i0.wp.com/uxiaohan.github.io/v2/2025/04/1744018738123.webp"
 ---
+
 从 OpenAI 开始提出推理模型开始，思考模型已经逐渐成为了学界和业界的热点，国内开源模型两巨头 qwen 和 deepseek，都有思考模式和非思考模式。尽管深度思考模型在推理任务上表现出色，但它们在推理过程中需要产生大量的思考信息，然后才输出最终结果。这导致了思考模型在推理任务上需要消耗大量的计算资源和时间。
 
 <!-- more -->
@@ -148,4 +149,4 @@ if __name__ == "__main__":
     asyncio.run(run())
 ```
 
-单一 server 或结合 cache-aware 调度的 serve r都可以利用前缀 kv cache, 因为开销不大。如此可以简单有效地限制最大思考长度，保障 SLA。
+单一 server 或结合 cache-aware 调度的 server 都可以利用前缀 kv cache, 因此开销不大。如此可以简单有效地限制最大思考长度，保障 SLA。

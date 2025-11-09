@@ -27,12 +27,13 @@ const remarkNote = () => {
         }
         // 设置 class
         hProperties.class = `vh-node vh-${name}${attributes.type ? ` ${name}-${attributes.type}` : ''}`;
-        // 文章字数统计
-        const textOnPage = toString(tree);
-        const readingTime = getReadingTime(textOnPage);
-        astroData.astro.frontmatter.reading_time = readingTime.minutes
-        astroData.astro.frontmatter.article_word_count = readingTime.words
+        
       }
+      // 文章字数统计
+      const textOnPage = toString(tree);
+      const readingTime = getReadingTime(textOnPage);
+      astroData.astro.frontmatter.reading_time = readingTime.minutes
+      astroData.astro.frontmatter.article_word_count = readingTime.words
     });
   };
 }

@@ -20,7 +20,6 @@ const { Site, Title, Author, GoogleAds } = SITE_CONFIG;
 // 处理文章内容
 const description = getDescription(post);
 const { Content, remarkPluginFrontmatter } = await render(post);
-console.log("\n\n\n\n\nremarkPluginFrontmatter", remarkPluginFrontmatter)
 // 文章字数和阅读时间
 const { reading_time, article_word_count } = remarkPluginFrontmatter;
 // 公共 Layout
