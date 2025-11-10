@@ -15,7 +15,7 @@ import { remarkNote, addClassNames } from './src/plugins/markdown.custom'
 // Markdown 配置================
 import SITE_INFO from './src/config';
 import swup from '@swup/astro';
-import { file } from "astro/loaders";
+
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_INFO.Site,

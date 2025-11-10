@@ -15,8 +15,8 @@ if (!articleName) {
 const ArticleContent = `---
 title: "${articleName.replace(/"/g, '\\"')}"
 categories: "分类"
-tags: ['标签']
-id: "${articleID.slice(0, 16)}"
+tags: ["标签"]
+id: "${articleID}"
 date: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}
 cover: "封面图URL (为空默认随机内置封面 /public/assets/images/banner)"
 ---

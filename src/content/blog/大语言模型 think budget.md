@@ -11,20 +11,19 @@ date: 2025-10-26 17:13:27
 
 从 OpenAI 开始提出推理模型开始，思考模型已经逐渐成为了学界和业界的热点，国内开源模型两巨头 qwen 和 deepseek，都有思考模式和非思考模式。尽管深度思考模型在推理任务上表现出色，但它们在推理过程中需要产生大量的思考信息，然后才输出最终结果。这导致了思考模型在推理任务上需要消耗大量的计算资源和时间。
 
-<!-- more -->
-我不知道有多少人在使用思考模型，但笔者个人对思考模型的推理性能(性能吞吐)是极度不满意的，因此笔者一直避免使用思考模型，但人在江湖身不由己，有时候不得不使用思考模型。
+我不知道有多少人在使用思考模型，但笔者个人对思考模型的推理性能（性能吞吐）是极度不满意的，因此笔者一直避免使用思考模型，但人在江湖身不由己，有时候不得不使用思考模型。
 
-本文尝试从限制 think token 长度的角度降低推理模型的推理时延。其实千问官网已经提供了带 think budget的 demo，阿里云平台提供的api接口也有thinkbudget功能，但在当前开源 serving 框架里却依然没有一个开箱即用的实现，因此笔者分享个人的实现方法。
+本文尝试从限制 think token 长度的角度降低推理模型的推理时延。其实千问官网已经提供了带 think budget 的 demo，阿里云平台提供的 api 接口也有 thinkbudget 功能，但在当前开源 serving 框架里却依然没有一个开箱即用的实现，因此笔者分享个人的实现方法。
 
-首先说一下 think budget 的实现，其原理非常简单，就是在模型推理时，当输出的 `token 长度` 超过 think budget 时，就强行输出 `think 停止 token id`，从而达到限制思考长度的目的。qwen 的[官方文档](https://qwen.readthedocs.io/en/latest/getting_started/quickstart.html#thinking-budget)对此也有详细的说明。
+首先说一下 think budget 的实现，其原理非常简单，就是在模型推理时，当输出的 `token 长度` 超过 think budget 时，就强行输出 `think 停止 token id`，从而达到限制思考长度的目的。qwen 的 [官方文档](https://qwen.readthedocs.io/en/latest/getting_started/quickstart.html#thinking-budget) 对此也有详细的说明。
 
-更具体的, 笔者在此分别给出两种实现方法：
+更具体的，笔者在此分别给出两种实现方法：
 
 ## 两种方法
 
 ### Custom Logits Processor
 
-第一种是从 server 端考虑，我们可以添加自定义的 logits processor，具体实现和 qwen 的官方文档所说类似，需要在具体的 serving 框架中实现，其实当前 sglang 也有待 merge 的 [PR](https://github.com/sgl-project/sglang/pull/6208/files)， 但不知为何一直没有被合并。该实现看似修改代码较多，但原理依然如前文所述并不复杂。笔者还找到网上有一个公开的 transformers库 使用的 logits processor 实现如下：
+第一种是从 server 端考虑，我们可以添加自定义的 logits processor，具体实现和 qwen 的官方文档所说类似，需要在具体的 serving 框架中实现，其实当前 sglang 也有待 merge 的 [PR](https://github.com/sgl-project/sglang/pull/6208/files)， 但不知为何一直没有被合并。该实现看似修改代码较多，但原理依然如前文所述并不复杂。笔者还找到网上有一个公开的 transformers 库 使用的 logits processor 实现如下：
 
 ``` python
 #| filename: thinking_budget_processor.py
@@ -75,7 +74,7 @@ class ThinkingTokenBudgetProcessor(LogitsProcessor):
         return scores
 ```
 
-以上代码转载自: <https://muellerzr.github.io/til/end_thinking.html>
+以上代码转载自：<https://muellerzr.github.io/til/end_thinking.html>
 
 已有朱玉在前，笔者也无需多说了。
 
@@ -143,7 +142,6 @@ async def run(think_budget = 512, max_new_tokens=4096):
                 text = text + "\n\nConsidering the limited time by the user, I have to give the solution based on the thinking directly now.\n</think>\n\n" + json.loads(data)["text"]
     print(text)
     return text
-
 
 if __name__ == "__main__":
     asyncio.run(run())
