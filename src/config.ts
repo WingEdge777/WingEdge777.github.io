@@ -14,7 +14,7 @@ export default {
   // 网站座右铭
   Motto: '',
   // Cover 网站缩略图
-  Cover: '/assets/images/banner/072c12ec85d2d3b5.webp',
+  Cover: '/assets/images/banner/7b1491d13dfb97a4.webp',
   // 网站侧边栏公告 (不填写即不开启)
   Tips: '<p>欢迎光临我的博客 🎉</p>',
   // 首页打字机文案列表
@@ -52,12 +52,12 @@ export default {
   Navs: [
     // 仅支持 SVG 且 SVG 需放在 public/assets/images/svg/ 目录下，填入文件名即可 <不需要文件后缀名>（封装了 SVG 组件 为了极致压缩 SVG）
     // 建议使用 https://tabler.io/icons 直接下载 SVG
-    { text: '博客', link: '/', icon: 'Nav_archives' },
-    { text: '友链', link: '/links', icon: 'Nav_friends' },
-    { text: '动态', link: '/talking', icon: 'Nav_talking' },
-    { text: 'archive', link: '/archives', icon: 'Nav_archives' },
-    { text: '留言', link: '/message', icon: 'Nav_message' },
-    { text: 'about', link: '/about', icon: 'Nav_about' },
+    { text: 'Blog', link: '/', icon: 'Nav_archives' },
+    { text: 'Link', link: '/links', icon: 'Nav_friends' },
+    { text: 'Moment', link: '/talking', icon: 'Nav_talking' },
+    { text: 'Archive', link: '/archives', icon: 'Nav_archives' },
+    { text: 'Message', link: '/message', icon: 'Nav_message' },
+    { text: 'About', link: '/about', icon: 'Nav_about' },
   ],
   // 侧边栏个人网站
   WebSites: [
