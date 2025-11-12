@@ -24,11 +24,11 @@ import banner from "@/assets/images/home-banner.webp";
 const optimizedBanner = await getImage({
     src: banner,
     // 假设您的 Banner 宽度是 1200px
-    // width: 1200, 
+    width: 1200, 
     // 您可以选择输出的格式，如 'webp' 或 'avif'
     format: 'webp', 
     // 让 Astro 生成多个尺寸，供浏览器选择（可选，但推荐）
-    densities: [1, 2], 
+    densities: [1], 
 });
 const homeBannerStyle = `url('${optimizedBanner.src}') no-repeat center 60%/cover`;
 
