@@ -32,7 +32,7 @@ export default {
     // 其他页面高度
     PageHeight: '25rem',
     // 背景
-    background: "url('/assets/images/home-banner.webp') no-repeat center 60%/cover",
+    background: "/assets/images/home-banner.webp"
   },
   // 博客主题配置
   Theme: {

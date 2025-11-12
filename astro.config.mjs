@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import Compress from "@playform/compress";
 import Compressor from "astro-compressor";
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Markdown 配置================
@@ -61,5 +61,8 @@ export default defineConfig({
 	i18n: {
 		locales: ["zh-CN", "en"],
 		defaultLocale: "zh-CN",
-	}
+	},
+	image: {
+		service: passthroughImageService(),
+	},
 });

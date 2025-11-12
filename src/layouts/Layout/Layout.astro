@@ -18,6 +18,21 @@ import Footer from "@/components/Footer/Footer.astro";
 import BackTop from "@/components/BackTop/BackTop.astro";
 // 手机端侧边栏
 import MobileSidebar from "@/components/MobileSidebar/MobileSidebar.astro";
+
+import { getImage } from 'astro:assets';
+import banner from "@/assets/images/home-banner.webp";
+const optimizedBanner = await getImage({
+    src: banner,
+    // 假设您的 Banner 宽度是 1200px
+    // width: 1200, 
+    // 您可以选择输出的格式，如 'webp' 或 'avif'
+    format: 'webp', 
+    // 让 Astro 生成多个尺寸，供浏览器选择（可选，但推荐）
+    densities: [1, 2], 
+});
+const homeBannerStyle = `url('${optimizedBanner.src}') no-repeat center 60%/cover`;
+
+
 // A Modern CSS Reset
 import "@/styles/Reset.less";
 // 全局基础样式
@@ -36,7 +51,7 @@ import "./Layout.less";
 		<Fragment
 			set:html={`<style>:root {${Object.entries(Theme)
 				.map(([key, value]) => `${key}:${value};`)
-				.join("")}--vh-main-header-height:${Home ? HomeBanner.HomeHeight : HomeBanner.PageHeight};--vh-home-banner:${HomeBanner.background}}</style>`}
+				.join("")}--vh-main-header-height:${Home ? HomeBanner.HomeHeight : HomeBanner.PageHeight};--vh-home-banner:${homeBannerStyle}</style>`}
 		/>
 	</Head>
 	<body>
