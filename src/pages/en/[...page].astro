@@ -30,8 +30,6 @@ import Layout from "@/layouts/Layout/Layout.astro";
 import Pagination from "@/components/Pagination/Pagination.astro";
 const currentPage = page_data.url.current.replace("/", "");
 import { getRelativeLocaleUrl } from 'astro:i18n';
-const aboutURL = getRelativeLocaleUrl("en", "about");
-console.log("\n\n\n\n\n", getRelativeLocaleUrl("en", "about"))
 ---
 
 <Layout title={currentPage ? `第${currentPage}页文章` : ""} description={Description} Home={true}>

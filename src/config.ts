@@ -28,7 +28,7 @@ export default {
   HomeBanner: {
     enable: true,
     // 首页高度
-    HomeHeight: '40rem',
+    HomeHeight: '35rem',
     // 其他页面高度
     PageHeight: '25rem',
     // 背景
