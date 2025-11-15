@@ -1,6 +1,6 @@
 ---
 title: "leetcode 3321. 计算子数组的 x-sum II"
-categories: "Code"
+categories: "leetcode"
 tags: 
     - "双指针"
     - "滑动窗口"

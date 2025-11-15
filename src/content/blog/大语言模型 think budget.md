@@ -1,8 +1,7 @@
 ---
 title: 大语言模型 think budget
-categories: Code
+categories: AI infer
 tags:
-  - AI infer
   - LLM serving
   - sglang
 id: 1234567
