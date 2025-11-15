@@ -6,7 +6,7 @@ tags:
     - "滑动窗口"
 id: "b084669b799d0d42"
 date: 2025-11-15 12:30:41
-cover: "./assets/images/banner/8cef6fb3c78dc3ad.webp"
+cover: "/assets/images/banner/8cef6fb3c78dc3ad.webp"
 ---
 
 :::note

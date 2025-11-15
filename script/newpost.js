@@ -21,7 +21,7 @@ categories: "分类"
 tags: ["标签"]
 id: "${articleID}"
 date: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}
-cover: "./assets/images/banner/${banner}"
+cover: "/assets/images/banner/${banner}"
 ---
 
 :::note

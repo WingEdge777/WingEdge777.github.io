@@ -1,6 +1,8 @@
 ---
 const { prev, next } = Astro.props;
 import "./PrevNextArticle.less";
+console.log("Prev Cover:", prev?.cover);
+console.log("Prev ID:", prev?.id);
 ---
 
 <section class="vh-otarticle">
