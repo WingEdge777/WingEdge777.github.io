@@ -91,11 +91,6 @@ export default {
     Twikoo: {
       enable: true,
       envId: 'https://twikoo.wingedge777.com'
-    },
-    // Waline 评论
-    Waline: {
-      enable: false,
-      serverURL: ''
     }
   },
   // Google 广告

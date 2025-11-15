@@ -6,35 +6,8 @@ declare const twikoo: any;
 // Twikoo 评论
 const TwikooFn = async (commentDOM: string) => {
   document.querySelector(commentDOM)!.innerHTML = '<section class="vh-space-loading"><span></span><span></span><span></span></section>'
-  await LoadScript("https://registry.npmmirror.com/twikoo/1.6.41/files/dist/twikoo.all.min.js");
+  await LoadScript("https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js");
   twikoo.init({ envId: SITE_INFO.Comment.Twikoo.envId, el: commentDOM, onCommentLoaded: () => setTimeout(() => document.querySelectorAll('.vh-comment a[href="#"]').forEach(link => link.removeAttribute('href'))) })
-}
-
-// Waline 评论
-const WalineFn = async (commentDOM: string, walineInit: any) => {
-  import('@waline/client/waline.css');
-  import('@waline/client/waline-meta.css');
-  const { init } = await import('@waline/client');
-  walineInit = init({
-    el: commentDOM, path: window.location.pathname.replace(/\/$/, ''), serverURL: SITE_INFO.Comment.Waline.serverURL,
-    emoji: ['https://registry.npmmirror.com/@waline/emojis/1.3.0/files/alus', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/bilibili', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/bmoji', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/qq', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/weibo', 'https://registry.npmmirror.com/@waline/emojis/1.3.0/files/soul-emoji'],
-    reaction: [
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_agree.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_look_down.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_sunglasses.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_pick_nose.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_awkward.png",
-      "https://registry.npmmirror.com/@waline/emojis/1.3.0/files/tieba/tieba_sleep.png",
-    ],
-    requiredMeta: ['nick', 'mail'],
-    imageUploader: async (file: any) => {
-      const body = new FormData();
-      body.append('file', file);
-      const res = await fetch("https://wp-cdn.4ce.cn/upload", { method: "POST", body });
-      const resJson = await res.json();
-      return resJson.data.link.replace('i.imgur.com', 'wp-cdn.4ce.cn/v2');
-    }
-  });
 }
 
 // 检查是否开启评论
@@ -45,14 +18,14 @@ const checkComment = () => {
 }
 
 // 初始化评论插件
-const commentInit = async (key: string, walineInit: any) => {
+const commentInit = async (key: string) => {
   // 评论 DOM 
   const commentDOM = '.vh-comment>section'
   if (!document.querySelector(commentDOM)) return;
   // 评论列表
-  const CommentList: any = { TwikooFn, WalineFn };
+  const CommentList: any = { TwikooFn,  };
   // 初始化评论
-  CommentList[`${key}Fn`](commentDOM, walineInit);
+  CommentList[`${key}Fn`](commentDOM);
 }
 
 export { checkComment, commentInit }

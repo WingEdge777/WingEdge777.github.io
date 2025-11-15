@@ -42,7 +42,7 @@ import SmoothScroll from "@/scripts/Smoothscroll";
 // 页面初始化 Only
 const videoList: any[] = [];
 const MusicList: any[] = [];
-let commentLIst: any = { walineInit: null };
+let commentLIst: any = { };
 const indexInit = async (only: boolean = true) => {
   // 初始化网站运行时间
   only && initWebSiteTime();
@@ -71,7 +71,7 @@ const indexInit = async (only: boolean = true) => {
   // 谷歌 SEO 推送
   SeoPushInit();
   // 文章评论初始化
-  checkComment() && commentInit(checkComment(), commentLIst)
+  checkComment() && commentInit(checkComment())
   // 打字效果
   only && TypeWriteInit();
   // 泡泡🫧效果
@@ -91,9 +91,6 @@ export default () => {
   inRouter(() => indexInit(false));
   // 离开当前页面时触发
   outRouter(() => {
-    // 销毁评论
-    commentLIst.walineInit && commentLIst.walineInit.destroy();
-    commentLIst.walineInit = null;
     // 销毁播放器
     videoList.forEach((i: any) => i.destroy());
     videoList.length = 0;
