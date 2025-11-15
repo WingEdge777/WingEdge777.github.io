@@ -6,7 +6,7 @@ tags:
     - "滑动窗口"
 id: "b084669b799d0d42"
 date: 2025-11-15 12:30:41
-# cover: "封面图 URL （为空默认随机内置封面 /public/assets/images/banner)"
+cover: "./assets/images/banner/8cef6fb3c78dc3ad.webp"
 ---
 
 :::note

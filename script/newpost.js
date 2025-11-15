@@ -12,13 +12,16 @@ if (!articleName) {
   console.error('请提供文章名称，例如：pnpm newpost "第一篇文章"');
   process.exit(1);
 }
+const banners = await fs.readdir("./public/assets/images/banner")
+const banner = banners[Math.floor(Math.random()*banners.length)]
+
 const ArticleContent = `---
 title: "${articleName.replace(/"/g, '\\"')}"
 categories: "分类"
 tags: ["标签"]
 id: "${articleID}"
 date: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}
-# cover: "封面图URL (为空默认随机内置封面 /public/assets/images/banner)"
+cover: "./assets/images/banner/${banner}"
 ---
 
 :::note
@@ -31,7 +34,7 @@ date: ${dayjs().format('YYYY-MM-DD HH:mm:ss')}
 const init = async () => {
   // 写文件
   const now = dayjs();
-  const targetDir = path.join(__dirname, '../src/content/blog', `${now.year()}/${now.format('MM')}`);
+  const targetDir = path.join(__dirname, '../src/content/blog');
   try {
     await fs.mkdir(targetDir, { recursive: true });
     await fs.writeFile(path.join(targetDir, `${articleName}.md`), ArticleContent, 'utf8');

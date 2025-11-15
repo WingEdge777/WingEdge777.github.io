@@ -6,7 +6,7 @@ tags:
   - sglang
 id: 1234567
 date: 2025-10-26 17:13:27
-# cover: "https://i0.wp.com/uxiaohan.github.io/v2/2025/04/1744018738123.webp"
+cover: "./assets/images/banner/7b1491d13dfb97a4.webp"
 ---
 :::note
 我不知道有多少人在使用思考模型，但笔者个人对思考模型的推理性能（性能吞吐）是极度不满意的，因此笔者一直避免使用思考模型，但人在江湖身不由己，有时候不得不使用思考模型。
