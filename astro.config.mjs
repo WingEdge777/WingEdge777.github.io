@@ -20,8 +20,7 @@ import swup from '@swup/astro';
 export default defineConfig({
 	site: SITE_INFO.Site,
 	build: {
-		assets: 'vh_static',
-		format: 'file'
+		assets: 'vh_static'
 	},
 	integrations: [swup({
 		theme: false,

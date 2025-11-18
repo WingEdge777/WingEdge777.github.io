@@ -18,6 +18,12 @@ const tags = getTags().slice(0, 16);
 const CountInfo = getCountInfo();
 // 最新文章
 const recommendArticles = getRecommendArticles();
+// TOC
+const { post, headings } = Astro.props;
+// const currentPath = Astro.url.pathname;
+// const isBlogPost = currentPath.startsWith('/blog/');
+const shouldShowToc = headings && headings.length > 0;
+console.log("shouldShowToc", shouldShowToc, headings)
 // Google 广告组件
 import GoogleAd from "@/components/GoogleAd/GoogleAd.astro";
 // 侧边栏样式
@@ -60,7 +66,7 @@ import "./Aside.less";
 
 	<!-- 公告块 -->
 	{
-		SITE_CONFIG.Tips && (
+		!shouldShowToc && SITE_CONFIG.Tips && (
 			<section class="vh-aside-item tips">
 				<span>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
