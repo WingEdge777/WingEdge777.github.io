@@ -1,5 +1,5 @@
 ---
-title: "leetcode 3321. 计算子数组的 x-sum II"
+title: "leetcode 3321. 计算子数组的 x-sum II (hard)"
 categories: "leetcode"
 tags: 
     - "双指针"
