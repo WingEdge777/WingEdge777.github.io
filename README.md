@@ -6,7 +6,7 @@ Blog Demo  ➡️ [https://www.wingedge777.com](https://www.wingedge777.com)
 
 ## Modified Features
 
-- [x] Add github action config for easy deploy
+- [x] Add github action config for easy deployment
   - Pernsonal server or github pages, depending on your choise.
 - [x] Comment system:
   - keep twikoo only, rm waline
