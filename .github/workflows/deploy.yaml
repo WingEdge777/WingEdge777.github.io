@@ -49,6 +49,9 @@ jobs:
   deploy-dm:
     needs: build
     runs-on: ubuntu-latest
+    environment:
+      name: production  # 环境名称，比如 production, staging
+      url: https://www.wingedge777.com/  # 这里填你的网址
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -67,4 +70,8 @@ jobs:
 
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
           
-          rsync -avz --delete dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/root/workspace/blog-site
+          rsync -avz \
+          --chown=www-data:www-data \
+          --chmod=D755,F644 \
+          --delete \
+          dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/blog-site
