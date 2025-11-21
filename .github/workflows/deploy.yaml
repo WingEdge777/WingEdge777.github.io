@@ -29,6 +29,11 @@ jobs:
           build-cmd: pnpm run build # The command to run to build your site. Runs the package build script/task by default. (optional)
         # env:
           # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
+      - name: Upload artifact for VPS
+        uses: actions/upload-artifact@v4
+        with:
+          name: vps-dist-files
+          path: ./dist
 
   deploy-gh:
     needs: build
@@ -45,6 +50,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: vps-dist-files # 对应上面的名字
+          path: dist # 下载并解压到 dist 目录
+      - name: Check files
+        run: ls -R dist
       - name: Deploy via rsync
         env:
           deploy_key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
@@ -52,6 +64,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "$deploy_key" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-        
+
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+          
           rsync -avz --delete dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/root/workspace/blog-site
