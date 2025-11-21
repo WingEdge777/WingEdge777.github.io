@@ -10,5 +10,5 @@ Blog Demo  ➡️ [https://www.wingedge777.com](https://www.wingedge777.com)
   - Pernsonal server or github pages, depending on your choise.
 - [x] Comment system:
   - keep twikoo only, rm waline
-- [] Astro managed assets, minimize outputs size.
-  - ing
+- [ ] Astro managed assets, minimize outputs size.
+  - ing: home-banner optimized
