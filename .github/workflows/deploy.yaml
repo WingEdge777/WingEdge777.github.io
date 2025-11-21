@@ -30,7 +30,7 @@ jobs:
         # env:
           # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
 
-  deploy:
+  deploy-gh:
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -40,3 +40,18 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+    
+  deploy-dm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via rsync
+        env:
+          deploy_key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$deploy_key" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+          rsync -avz --delete dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/root/workspace/blog-site
