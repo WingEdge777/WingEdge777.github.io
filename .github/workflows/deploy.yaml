@@ -67,7 +67,7 @@ jobs:
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           # 使用 printf 写入私钥
-          printf "%s\n" "$deploy_key" > ~/.ssh/id_rsa
+          echo "%s" "$deploy_key" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           # 【重点】这里删掉了 ssh-keyscan，因为配置端口太麻烦，不如直接禁用检查
 
