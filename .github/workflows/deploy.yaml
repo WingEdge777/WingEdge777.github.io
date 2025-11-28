@@ -60,20 +60,29 @@ jobs:
           path: dist # 下载并解压到 dist 目录
       - name: Check files
         run: ls -R dist
-      - name: Deploy via rsync
+      - name: Setup SSH Key
         env:
           deploy_key: ${{ secrets.VPS_SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$deploy_key" > ~/.ssh/id_rsa
+          chmod 700 ~/.ssh
+          printf "%s\n" "$deploy_key" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-
           ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
 
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "uptime"
+      - name: Test Connection & Remote Environment
+        run: |
+          echo "👉 Testing SSH Connection..."
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "whoami"
           
+          echo "👉 Checking Remote Rsync..."
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "rsync --version"
+
+      - name: Deploy via rsync
+        run: |
+          echo "👉 Starting Deployment..."
           rsync -avz \
           --chown=www-data:www-data \
-          --chmod=D755,F644 \
           --delete \
+          -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" \
           dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/blog-site
