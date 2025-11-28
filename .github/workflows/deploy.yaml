@@ -69,21 +69,6 @@ jobs:
           
           printf "%s\n" "$deploy_key" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          
-          echo "🔎 Debugging Key Format (Safety Check):"
-          echo "--- Head (First 2 lines) ---"
-          head -n 2 ~/.ssh/id_rsa
-          echo "--- Tail (Last 2 lines) ---"
-          tail -n 2 ~/.ssh/id_rsa
-          
-          LINE_COUNT=$(wc -l < ~/.ssh/id_rsa)
-          echo "--- Total Lines: $LINE_COUNT ---"
-          
-          if [ "$LINE_COUNT" -lt 2 ]; then
-             echo "❌ Error: Private Key is formatted as a single line!"
-             echo "Please re-paste your secret in GitHub Settings."
-             exit 1
-          fi
 
       - name: Deploy via rsync
         env:
