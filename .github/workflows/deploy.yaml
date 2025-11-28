@@ -77,11 +77,11 @@ jobs:
         run: |
           
           echo "👉 Testing connection on port $port..."
-          ssh -p $port -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "uptime"
+          ssh -vvv -p $port -o BatchMode=yes -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} "uptime"
           
           echo "👉 Starting rsync deployment..."
           rsync -avz \
           --chown=www-data:www-data \
           --delete \
-          -e "ssh -p $port -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" \
+          -e "ssh -p $port -o BatchMode=yes -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa" \
           dist/ ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/blog-site
